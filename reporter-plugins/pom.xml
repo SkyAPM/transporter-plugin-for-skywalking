@@ -29,6 +29,8 @@
         <version>1.0.0</version>
     </parent>
 
+    <artifactId>reporter-plugins</artifactId>
+
     <name>SkyWalking Reporter Plugins</name>
     <packaging>pom</packaging>
 

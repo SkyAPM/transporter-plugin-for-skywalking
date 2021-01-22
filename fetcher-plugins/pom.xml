@@ -29,6 +29,8 @@
         <version>1.0.0</version>
     </parent>
 
+    <artifactId>fetcher-plugins</artifactId>
+
     <name>SkyWalking Fetcher Plugins</name>
     <packaging>pom</packaging>
 
