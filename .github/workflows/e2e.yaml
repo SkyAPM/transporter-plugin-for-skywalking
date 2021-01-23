@@ -23,7 +23,7 @@ on:
       - '!**.md'
   push:
     branches:
-      - master
+      - main
 
 env:
   SKIP_TEST: true
