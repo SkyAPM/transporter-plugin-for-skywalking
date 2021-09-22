@@ -31,7 +31,7 @@
     <properties>
         <checkstyle.version>6.18</checkstyle.version>
         <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
-        <skywalking.version>8.3.0</skywalking.version>
+        <skywalking.version>8.7.0</skywalking.version>
     </properties>
 
     <modules>
