@@ -20,10 +20,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <modules>
-        <module>pulsar-fetcher-plugin</module>
-    </modules>
-
     <parent>
         <groupId>org.openskywalking</groupId>
         <artifactId>transporter-plugins</artifactId>
@@ -34,6 +30,13 @@
 
     <name>SkyWalking Fetcher Plugins</name>
     <packaging>pom</packaging>
+
+    <properties>
+        <shade.package>org.openskywalking.transporter.reporter.dependencies</shade.package>
+    </properties>
+    <modules>
+        <module>pulsar-fetcher-plugin</module>
+    </modules>
 
     <dependencies>
         <dependency>

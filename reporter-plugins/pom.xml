@@ -38,6 +38,7 @@
     <properties>
         <agent.package.dest.dir>${project.build.directory}/../../../../skywalking-agent</agent.package.dest.dir>
         <optional.reporter.plugins.dest.dir>${agent.package.dest.dir}/optional-reporter-plugins</optional.reporter.plugins.dest.dir>
+        <shade.package>org.openskywalking.transporter.reporter.dependencies</shade.package>
     </properties>
 
     <dependencies>
