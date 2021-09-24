@@ -20,7 +20,6 @@ package org.apache.skywalking.openskywalking.reporter.pulsar;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -40,7 +39,6 @@ import org.apache.skywalking.apm.network.common.v3.KeyStringValuePair;
 import org.apache.skywalking.apm.network.management.v3.InstancePingPkg;
 import org.apache.skywalking.apm.network.management.v3.InstanceProperties;
 import org.apache.skywalking.apm.util.RunnableWithExceptionProtection;
-import org.apache.skywalking.apm.util.StringUtil;
 
 /**
  * A service management data(Instance registering properties and Instance pinging) reporter.
@@ -75,7 +73,6 @@ public class PulsarServiceManagementServiceClient implements BootService, Runnab
         }
     }
 
-
     @Override
     public void boot() {
         heartbeatFuture = Executors.newSingleThreadScheduledExecutor(
@@ -85,7 +82,6 @@ public class PulsarServiceManagementServiceClient implements BootService, Runnab
             t -> LOGGER.error("unexpected exception.", t)
         ), 0, Config.Collector.HEARTBEAT_PERIOD, TimeUnit.SECONDS);
     }
-
 
     @Override
     public void run() {
@@ -125,7 +121,6 @@ public class PulsarServiceManagementServiceClient implements BootService, Runnab
             }
         }
     }
-
 
     @Override
     public void onComplete() {

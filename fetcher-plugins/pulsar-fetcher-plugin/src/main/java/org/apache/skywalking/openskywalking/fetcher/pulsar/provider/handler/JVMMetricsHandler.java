@@ -82,7 +82,6 @@ public class JVMMetricsHandler extends AbstractPulsarHandler {
     public void handle(Message<byte[]> message) {
         try (HistogramMetrics.Timer ignored = histogramBatch.createTimer()) {
             JVMMetricCollection metrics = JVMMetricCollection.parseFrom(message.getValue());
-            log.error("--------------------------------------------------1187");
             if (log.isDebugEnabled()) {
                 log.debug(
                     "Fetched JVM metrics from service[{}] instance[{}] reported.",

@@ -17,13 +17,8 @@
         <!-- in your <dependencies> block -->
         <dependency>
             <groupId>org.apache.pulsar</groupId>
-            <artifactId>pulsar-client</artifactId>
+            <artifactId>pulsar-client-all</artifactId>
             <version>${pulsar-clients.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.pulsar</groupId>
-            <artifactId>pulsar-client-admin</artifactId>
-            <version>${pulsar-admin-clients.version}</version>
         </dependency>
     </dependencies>
 
@@ -51,16 +46,19 @@
                                 <transformer
                                     implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                             </transformers>
-                            <relocations>
-                                <relocation>
-                                    <pattern>org.apache.pulsar</pattern>
-                                    <shadedPattern>${shade.package}/org.apache.pulsar</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>org.slf4j</pattern>
-                                    <shadedPattern>${shade.package}/org.slf4j</shadedPattern>
-                                </relocation>
-                            </relocations>
+                            <artifactSet>
+                               <includes>
+                                   <indluce>org.apache.pulsar</indluce>
+                               </includes>
+                            </artifactSet>
+                            <filters>
+                                <filter>
+                                    <artifact>org.apache.pulsar:pulsar-client-all:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/versions/11/org/glassfish/jersey/internal/jsr166/**</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>

@@ -22,6 +22,7 @@
             <groupId>org.apache.skywalking</groupId>
             <artifactId>log-analyzer</artifactId>
             <version>${skywalking.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -33,6 +34,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
+
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -48,16 +50,50 @@
                                 <transformer
                                     implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                             </transformers>
+                            <artifactSet>
+                                <excludes>
+                                    <exclude>org.bouncycastle:bcprov-ext-jdk15on:*</exclude>
+                                    <exclude>org.apache.skywalking:*</exclude>
+                                    <exclude>org.slf4j:*</exclude>
+                                </excludes>
+
+                            </artifactSet>
+                            <filters>
+                                <filter>
+                                    <artifact>org.bouncycastle:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/**</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                             <relocations>
                                 <relocation>
                                     <pattern>org.apache.pulsar</pattern>
                                     <shadedPattern>${shade.package}/org.apache.pulsar</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>org.slf4j</pattern>
-                                    <shadedPattern>${shade.package}/org.slf4j</shadedPattern>
+                                    <pattern>org.bouncycastle</pattern>
+                                    <shadedPattern>${shade.package}/org.bouncycastle</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.sun.activation</pattern>
+                                    <shadedPattern>${shade.package}/com.sun.activation</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>javax.ws.rs</pattern>
+                                    <shadedPattern>${shade.package}/javax.ws.rs</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>net.jcip</pattern>
+                                    <shadedPattern>${shade.package}/net.jcip</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>javax.validation</pattern>
+                                    <shadedPattern>${shade.package}/javax.validation</shadedPattern>
                                 </relocation>
                             </relocations>
+
+
                         </configuration>
                     </execution>
                 </executions>

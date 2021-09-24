@@ -18,19 +18,18 @@
 package org.apache.skywalking.openskywalking.fetcher.pulsar;
 
 import com.google.common.collect.ImmutableMap;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pulsar.client.api.Consumer;
 import org.apache.pulsar.client.api.MessageListener;
 import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.PulsarClientException;
-import org.apache.skywalking.openskywalking.fetcher.pulsar.module.PulsarFetcherConfig;
-import org.apache.skywalking.openskywalking.fetcher.pulsar.provider.handler.PulsarHandler;
 import org.apache.skywalking.oap.server.library.module.ModuleStartException;
 import org.apache.skywalking.oap.server.library.server.pool.CustomThreadFactory;
-
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import org.apache.skywalking.openskywalking.fetcher.pulsar.module.PulsarFetcherConfig;
+import org.apache.skywalking.openskywalking.fetcher.pulsar.provider.handler.PulsarHandler;
 
 @Slf4j
 public class PulsarFetcherHandlerRegister {
@@ -43,7 +42,7 @@ public class PulsarFetcherHandlerRegister {
     private int threadPoolQueueSize = 10000;
     private final ThreadPoolExecutor executor;
 
-    public PulsarFetcherHandlerRegister(PulsarFetcherConfig config) throws ModuleStartException {
+    public PulsarFetcherHandlerRegister(PulsarFetcherConfig config) {
         this.config = config;
 
         try {
@@ -80,6 +79,7 @@ public class PulsarFetcherHandlerRegister {
                              .topics(handlerMap.keySet().asList())
                              .subscriptionName(config.getSubscription())
                              .messageListener((MessageListener<byte[]>) (consumer, msg) -> {
+                                 log.info("Get data from pulsar, begin to handle.");
                                  try {
                                      executor.submit(() -> handlerMap.get(msg.getTopicName()).handle(msg));
                                      consumer.acknowledge(msg);

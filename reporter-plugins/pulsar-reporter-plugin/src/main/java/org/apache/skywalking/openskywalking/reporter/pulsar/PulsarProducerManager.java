@@ -84,7 +84,7 @@ public class PulsarProducerManager implements BootService, Runnable {
     private ScheduledFuture<?> bootProducerFuture;
 
     @Override
-    public void prepare(){
+    public void prepare() {
 
     }
 
@@ -100,7 +100,6 @@ public class PulsarProducerManager implements BootService, Runnable {
                               PulsarReporterPluginConfig.Plugin.Pulsar.PULSAR_CLIENT_SCHEDULE_AT_FIXED_RETE_UNIT
         );
     }
-
 
     @Override
     public void run() {
@@ -215,7 +214,6 @@ public class PulsarProducerManager implements BootService, Runnable {
         }
     }
 
-
     String formatTopicNameThenRegister(String topic) {
         StringBuilder topicName = new StringBuilder(DOMAIN).append("://").append(NAMESPACE).append('/').append(topic);
         topics.add(topicName.toString());
@@ -251,7 +249,7 @@ public class PulsarProducerManager implements BootService, Runnable {
     }
 
     @Override
-    public void onComplete(){
+    public void onComplete() {
 
     }
 
