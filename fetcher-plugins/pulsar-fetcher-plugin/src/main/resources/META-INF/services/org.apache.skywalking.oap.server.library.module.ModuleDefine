@@ -16,4 +16,4 @@
 #
 #
 
-org.apache.skywalking.openskywalking.fetcher.pulsar.module.PulsarFetcherModule
+org.apache.skywalking.openskywalking.transporter.fetcher.pulsar.module.PulsarFetcherModule

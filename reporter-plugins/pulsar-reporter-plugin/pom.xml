@@ -12,7 +12,6 @@
     <artifactId>pulsar-reporter-plugin</artifactId>
     <packaging>jar</packaging>
 
-
     <dependencies>
         <!-- in your <dependencies> block -->
         <dependency>
@@ -29,6 +28,54 @@
             </plugin>
 
             <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.apache.pulsar</groupId>
+                                    <artifactId>pulsar-client-all</artifactId>
+                                    <version>${pulsar-clients.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <includes>org/apache/pulsar/shade/org/asynchttpclient/config/ahc-default.properties</includes>
+                                    <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>shade-pulsar-ahc-properties</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <!-- shade the AsyncHttpClient ahc-default.properties files in the pulsar -->
+                                <replace token= "org.apache.pulsar.shade.org.asynchttpclient."
+                                         value="${shade.package}.org.apache.pulsar.shade.org.asynchttpclient."
+                                         file="${project.build.directory}/classes/org/apache/pulsar/shade/org/asynchttpclient/config/ahc-default.properties"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <executions>
@@ -38,6 +85,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <createDependencyReducedPom>true</createDependencyReducedPom>
                             <createSourcesJar>true</createSourcesJar>
@@ -48,9 +96,19 @@
                             </transformers>
                             <artifactSet>
                                <includes>
-                                   <indluce>org.apache.pulsar</indluce>
+                                   <indluce>org.apache.pulsar:*</indluce>
                                </includes>
                             </artifactSet>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.apache.pulsar</pattern>
+                                    <shadedPattern>${shade.package}/org.apache.pulsar</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.pulsar.shade.org.asynchttpclient</pattern>
+                                    <shadedPattern>${shade.package}/org.apache.pulsar</shadedPattern>
+                                </relocation>
+                            </relocations>
                             <filters>
                                 <filter>
                                     <artifact>org.apache.pulsar:pulsar-client-all:*</artifact>

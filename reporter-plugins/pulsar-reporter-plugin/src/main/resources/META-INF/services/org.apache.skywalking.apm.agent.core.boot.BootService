@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-org.apache.skywalking.openskywalking.reporter.pulsar.PulsarProducerManager
-org.apache.skywalking.openskywalking.reporter.pulsar.PulsarContextManagerExtendService
-org.apache.skywalking.openskywalking.reporter.pulsar.PulsarServiceManagementServiceClient
-org.apache.skywalking.openskywalking.reporter.pulsar.PulsarJVMMetricsSender
-org.apache.skywalking.openskywalking.reporter.pulsar.PulsarTraceSegmentServiceClient
-org.apache.skywalking.openskywalking.reporter.pulsar.PulsarProfileSnapshotSender
-org.apache.skywalking.openskywalking.reporter.pulsar.PulsarMeterSender
+org.apache.skywalking.openskywalking.transporter.reporter.pulsar.PulsarProducerManager
+org.apache.skywalking.openskywalking.transporter.reporter.pulsar.PulsarContextManagerExtendService
+org.apache.skywalking.openskywalking.transporter.reporter.pulsar.PulsarServiceManagementServiceClient
+org.apache.skywalking.openskywalking.transporter.reporter.pulsar.PulsarJVMMetricsSender
+org.apache.skywalking.openskywalking.transporter.reporter.pulsar.PulsarTraceSegmentServiceClient
+org.apache.skywalking.openskywalking.transporter.reporter.pulsar.PulsarProfileSnapshotSender
+org.apache.skywalking.openskywalking.transporter.reporter.pulsar.PulsarMeterSender

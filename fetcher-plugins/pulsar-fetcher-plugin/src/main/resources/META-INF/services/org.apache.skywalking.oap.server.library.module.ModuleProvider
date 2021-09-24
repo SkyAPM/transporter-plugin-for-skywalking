@@ -16,4 +16,4 @@
 #
 #
 
-org.apache.skywalking.openskywalking.fetcher.pulsar.provider.PulsarFetcherProvider
+org.apache.skywalking.openskywalking.transporter.fetcher.pulsar.provider.PulsarFetcherProvider
