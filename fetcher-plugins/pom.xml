@@ -31,9 +31,6 @@
     <name>SkyWalking Fetcher Plugins</name>
     <packaging>pom</packaging>
 
-    <properties>
-        <shade.package>org.apache.skywalking.openskywalking.transporter.fetcher.dependencies</shade.package>
-    </properties>
     <modules>
         <module>pulsar-fetcher-plugin</module>
     </modules>
