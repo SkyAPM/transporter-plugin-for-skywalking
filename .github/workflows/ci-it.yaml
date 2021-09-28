@@ -34,7 +34,7 @@ jobs:
         with:
           submodules: true
       - name: Check License Header
-        uses: apache/skywalking-eyes@main
+        uses: apache/skywalking-eyes@ed749b83e23f10eae9c379870c3d5ed45ce4e67a
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Cache local Maven repository
