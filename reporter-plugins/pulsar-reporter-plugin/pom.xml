@@ -112,7 +112,8 @@
                             </transformers>
                             <artifactSet>
                                <includes>
-                                   <indluce>org.apache.pulsar:*</indluce>
+                                   <indlude>org.apache.pulsar:*</indlude>
+                                   <include>org.slf4j:*</include>
                                </includes>
                             </artifactSet>
                             <relocations>
@@ -123,6 +124,10 @@
                                 <relocation>
                                     <pattern>org.apache.pulsar.shade.org.asynchttpclient</pattern>
                                     <shadedPattern>${shade.package}/org.apache.pulsar</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.slf4j</pattern>
+                                    <shadedPattern>${shade.package}/org.slf4j</shadedPattern>
                                 </relocation>
                             </relocations>
                             <filters>
