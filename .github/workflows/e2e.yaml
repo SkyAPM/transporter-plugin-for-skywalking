@@ -35,6 +35,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      - name: Build transporter-plugins
+        shell: bash
+        run: ./mvnw clean package -DskipTests
       - name: Build consumer & provider images
         shell: bash
         run: |
