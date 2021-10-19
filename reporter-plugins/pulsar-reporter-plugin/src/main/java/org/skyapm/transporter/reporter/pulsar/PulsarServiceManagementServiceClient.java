@@ -30,6 +30,7 @@ import org.apache.skywalking.apm.agent.core.boot.DefaultNamedThreadFactory;
 import org.apache.skywalking.apm.agent.core.boot.OverrideImplementor;
 import org.apache.skywalking.apm.agent.core.boot.ServiceManager;
 import org.apache.skywalking.apm.agent.core.conf.Config;
+import org.apache.skywalking.apm.agent.core.jvm.LoadedLibraryCollector;
 import org.apache.skywalking.apm.agent.core.logging.api.ILog;
 import org.apache.skywalking.apm.agent.core.logging.api.LogManager;
 import org.apache.skywalking.apm.agent.core.os.OSUtil;
@@ -89,12 +90,13 @@ public class PulsarServiceManagementServiceClient implements BootService, Runnab
         }
         if (Math.abs(sendPropertiesCounter.getAndAdd(1)) % Config.Collector.PROPERTIES_REPORT_PERIOD_FACTOR == 0) {
             InstanceProperties instance = InstanceProperties.newBuilder()
-                                                            .setService(Config.Agent.SERVICE_NAME)
-                                                            .setServiceInstance(Config.Agent.INSTANCE_NAME)
-                                                            .addAllProperties(OSUtil.buildOSInfo(
-                                                                Config.OsInfo.IPV4_LIST_SIZE))
-                                                            .addAllProperties(SERVICE_INSTANCE_PROPERTIES)
-                                                            .build();
+                                                           .setService(Config.Agent.SERVICE_NAME)
+                                                           .setServiceInstance(Config.Agent.INSTANCE_NAME)
+                                                           .addAllProperties(OSUtil.buildOSInfo(
+                                                               Config.OsInfo.IPV4_LIST_SIZE))
+                                                           .addAllProperties(SERVICE_INSTANCE_PROPERTIES)
+                                                           .addAllProperties(LoadedLibraryCollector.buildJVMInfo())
+                                                           .build();
             try {
                 producer.newMessage()
                         .key(TOPIC_KEY_REGISTER + instance.getServiceInstance())
