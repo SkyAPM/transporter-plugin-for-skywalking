@@ -32,10 +32,10 @@ spans:
     serviceinstancename: "provider1"
     starttime: {{ gt .starttime 0 }}
     endtime: {{ gt .endtime 0 }}
-    endpointname: /info
+    endpointname: "{POST}/info"
     type: Entry
     peer: ""
-    component: Tomcat
+    component: SpringMVC
     iserror: false
     layer: Http
     tags:

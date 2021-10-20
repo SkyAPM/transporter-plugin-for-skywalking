@@ -20,7 +20,7 @@ traces:
   - segmentid: {{ notEmpty .segmentid }}
     endpointnames:
     {{- contains .endpointnames }}
-    - /info
+    - "{POST}/info"
     {{- end }}
     duration: {{ ge .duration 0 }}
     start: "{{ notEmpty .start}}"

@@ -45,7 +45,7 @@ verify:
     # max retry count
     count: 20
     # the interval between two retries, in millisecond.
-    interval: 10000
+    interval: 10s
   cases:
     # basic check: service list
     - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql service ls
@@ -57,7 +57,7 @@ verify:
     - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql endpoint list --keyword=info --service-name=e2e-service-provider
       expected: ../expected/service-endpoint.yml
     # basic check: service endpoint metrics
-    - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics linear --name endpoint_cpm --endpoint-name=/info --service-name=e2e-service-provider |yq e 'to_entries' -
+    - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics linear --name endpoint_cpm --endpoint-name={POST}/info --service-name=e2e-service-provider |yq e 'to_entries' -
       expected: ../expected/metrics-has-value.yml
 
     # service instance list
@@ -75,7 +75,7 @@ verify:
     - query: |
         swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql trace $( \
           swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql trace ls \
-            | yq e '.traces | select(.[].endpointnames[0]=="/info") | .[0].traceids[0]' - \
+            | yq e '.traces | select(.[].endpointnames[0]=="{POST}/info") | .[0].traceids[0]' - \
         )
       expected: ../expected/trace-info-detail.yml
     # event list
@@ -86,6 +86,6 @@ verify:
     - query: |
         swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql logs list --service-name=e2e-service-provider --trace-id=$( \
             swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql trace ls \
-              | yq e '.traces | select(.[].endpointnames[0]=="/info") | .[0].traceids[0]' -
+              | yq e '.traces | select(.[].endpointnames[0]=="{POST}/info") | .[0].traceids[0]' -
         )
       expected: ../expected/logs-list.yml
