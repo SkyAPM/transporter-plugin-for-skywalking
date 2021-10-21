@@ -53,13 +53,13 @@ public class JVMMetricsHandler extends AbstractPulsarHandler {
                                                .provider()
                                                .getService(MetricsCreator.class);
         histogram = metricsCreator.createHistogramMetric(
-            "meter_in_latency",
+            "jvm_metrics_in_latency",
             "The process latency of meter",
             new MetricsTag.Keys("protocol"),
             new MetricsTag.Values("pulsar")
         );
         histogramBatch = metricsCreator.createHistogramMetric(
-            "meter_in_latency",
+            "jvm_metrics_batch_in_latency",
             "The process latency of meter",
             new MetricsTag.Keys("protocol"),
             new MetricsTag.Values("pulsar")
