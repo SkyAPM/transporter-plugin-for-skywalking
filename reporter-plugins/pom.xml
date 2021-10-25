@@ -20,6 +20,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>pulsar-reporter-plugin</module>
+    </modules>
 
     <parent>
         <groupId>org.openskywalking</groupId>
@@ -35,6 +38,7 @@
     <properties>
         <agent.package.dest.dir>${project.build.directory}/../../../../skywalking-agent</agent.package.dest.dir>
         <optional.reporter.plugins.dest.dir>${agent.package.dest.dir}/optional-reporter-plugins</optional.reporter.plugins.dest.dir>
+        <shade.package>org.skyapm.transporter.reporter.dependencies</shade.package>
     </properties>
 
     <dependencies>
