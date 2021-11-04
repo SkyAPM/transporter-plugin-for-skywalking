@@ -1,0 +1,54 @@
+#  Copyright 2021 SkyAPM
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: E2E
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  E2E:
+    name: Basic function + ${{ matrix.case.name }} transport(Java8)
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      matrix:
+        case:
+          - name: Pulsar
+            path: test/e2e/case/pulsar/e2e.yaml
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Build transporter-plugins
+        shell: bash
+        run: ./mvnw clean package -DskipTests
+      - name: Build consumer & provider images
+        shell: bash
+        run: |
+          echo "::group::"
+          SW_VERSION=$(./mvnw -q -DforceStdout -N org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=skywalking.version)
+          ./mvnw -B package -f ./test/e2e/base/pom.xml -Dsw.version=${SW_VERSION}
+          echo "::endgroup::"
+      - name: Setup go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.16'
+      - name: Run E2E Tests
+        uses: apache/skywalking-infra-e2e@main
+        with:
+          e2e-file: ${{ matrix.case.path }}

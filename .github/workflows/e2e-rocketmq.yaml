@@ -28,8 +28,6 @@ jobs:
     strategy:
       matrix:
         case:
-          - name: Pulsar
-            path: test/e2e/case/pulsar/e2e.yaml
           - name: Rocketmq
             path: test/e2e/case/rocketmq/e2e.yml
     steps:
