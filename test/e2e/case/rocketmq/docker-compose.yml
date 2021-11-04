@@ -18,8 +18,8 @@ version: '2.1'
 services:
   namesrv:
     build:
-      context: ../../../../
-      dockerfile: ./test/e2e/case/rocketmq/Dockerfile
+      context: ./
+      dockerfile: ./Dockerfile
     container_name: rmqnamesrv
     expose:
       - 9876
@@ -34,8 +34,8 @@ services:
 
   broker-a:
     build:
-      context: ../../../../
-      dockerfile: ./test/e2e/case/rocketmq/Dockerfile
+      context: ./
+      dockerfile: ./Dockerfile
     container_name: rmqbroker
     expose:
       - 10909
