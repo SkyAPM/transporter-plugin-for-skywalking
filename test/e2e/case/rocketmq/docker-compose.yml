@@ -20,7 +20,7 @@ services:
     build: .
     container_name: rmqnamesrv
     expose:
-      - 9876:9876
+      - 9876
     networks:
       - e2e
     command: sh mqnamesrv
@@ -35,9 +35,9 @@ services:
       dockerfile: ./Dockerfile
     container_name: rmqbroker
     expose:
-      - 10909:10909
-      - 10911:10911
-      - 10912:10912
+      - 10909
+      - 10911
+      - 10912
     networks:
       - e2e
     environment:
@@ -59,7 +59,7 @@ services:
       SW_ROCKETMQ_FETCHER: default
       SW_ROCKETMQ_FETCHER_NAME_SERVERS: namesrv:9876
     ports:
-      - 12800:12800
+      - 12800
     depends_on:
       namesrv:
         condition: service_healthy
@@ -73,7 +73,7 @@ services:
     environment:
       SW_ROCKETMQ_NAME_SERVERS: namesrv:9876
     ports:
-      - 9090:9090
+      - 9090
     depends_on:
       oap:
         condition: service_healthy
