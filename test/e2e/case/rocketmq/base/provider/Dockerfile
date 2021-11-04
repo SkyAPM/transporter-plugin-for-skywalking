@@ -14,7 +14,15 @@
 # limitations under the License.
 #
 #
-FROM apache/skywalking-oap-server:8.7.0-es6
 
-COPY ./fetcher-plugins/pulsar-fetcher-plugin/target/pulsar-fetcher-plugin-1.0.0-shaded.jar /skywalking/oap-libs/
-COPY ./test/e2e/base/oap/application.yml /skywalking/config/application.yml
+FROM apache/skywalking-java-agent:8.7.0-jdk8
+
+COPY ./reporter-plugins/rocketmq-reporter-plugin/target/rocketmq-reporter-plugin-1.0.0-shaded.jar /skywalking/agent/plugins/
+
+VOLUME /services
+COPY ./test/e2e/base/provider/agent.config /skywalking/agent/config/agent.config
+ADD ./test/e2e/base/provider/target/e2e-service-provider.jar /services/
+
+ENV JAVA_OPTS=""
+
+CMD ["sh", "-c", "java $JAVA_OPTS -jar /services/e2e-service-provider.jar"]

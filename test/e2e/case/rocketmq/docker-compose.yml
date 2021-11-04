@@ -1,5 +1,4 @@
-#
-# Copyright 2021 SkyAPM
+#  Copyright 2021 SkyAPM
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,47 +11,69 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-#
+
 
 version: '2.1'
 
 services:
-  pulsar-a:
-    image: apachepulsar/pulsar:2.8.0
-    hostname: pulsar-a
+  namesrv:
+    build: .
+    container_name: rmqnamesrv
     expose:
-      - 6650
+      - 9876:9876
     networks:
       - e2e
+    command: sh mqnamesrv
     healthcheck:
-      test: ["CMD", "sh", "-c", "nc -nz 127.0.0.1 6650"]
+      test: ["CMD", "sh", "-c", "nc -nz 127.0.0.1 9876"]
       interval: 5s
       timeout: 60s
       retries: 120
-    command: ["sh", "-c", "bin/pulsar standalone"]
+
+  broker-a:
+    build:
+      dockerfile: ./Dockerfile
+    container_name: rmqbroker
+    expose:
+      - 10909:10909
+      - 10911:10911
+      - 10912:10912
+    networks:
+      - e2e
+    environment:
+      NAMESRV_ADDR: namesrv:9876
+    volumes:
+      - ./data/broker.conf:/opt/rocketmq-4.7.1/conf/broker.conf
+    command: sh mqbroker -c /opt/rocketmq-4.7.1/conf/broker.conf
+    depends_on:
+      namesrv:
+        condition: service_healthy
 
   oap:
     extends:
       file: ./base/base-compose.yml
       service: oap
-    ports:
-      - 12800
+    networks:
+      - e2e
     environment:
-      SW_PULSAR_FETCHER_SERVERS: pulsar://pulsar-a:6650
+      SW_ROCKETMQ_FETCHER: default
+      SW_ROCKETMQ_FETCHER_NAME_SERVERS: namesrv:9876
+    ports:
+      - 12800:12800
     depends_on:
-      pulsar-a:
+      namesrv:
         condition: service_healthy
 
   provider:
     extends:
       file: ./base/base-compose.yml
       service: provider
-    ports:
-      - 9090
+    networks:
+      - e2e
     environment:
-      SW_PULSAR_BROKER_SERVICE_URL: pulsar://pulsar-a:6650
-      SW_PULSAR_WEB_SERVICE_URL: http://pulsar-a:8080
+      SW_ROCKETMQ_NAME_SERVERS: namesrv:9876
+    ports:
+      - 9090:9090
     depends_on:
       oap:
         condition: service_healthy
@@ -61,17 +82,15 @@ services:
     extends:
       file: ./base/base-compose.yml
       service: consumer
+    networks:
+      - e2e
+    environment:
+      SW_ROCKETMQ_NAME_SERVERS: namesrv:9876
     ports:
       - 9090
-    environment:
-      PROVIDER_URL: http://provider:9090
-      SW_PULSAR_BROKER_SERVICE_URL: pulsar://pulsar-a:6650
-      SW_PULSAR_WEB_SERVICE_URL: http://pulsar-a:8080
     depends_on:
       provider:
         condition: service_healthy
 
 networks:
   e2e:
-
-

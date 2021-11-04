@@ -20,6 +20,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <ant-contrib.version>1.0b3</ant-contrib.version>
+        <ant-nodeps.version>1.8.1</ant-nodeps.version>
+    </properties>
     <parent>
         <groupId>org.openskywalking</groupId>
         <artifactId>transporter-plugins</artifactId>
@@ -33,6 +38,7 @@
 
     <modules>
         <module>pulsar-fetcher-plugin</module>
+        <module>rocketmq-fetcher-plugin</module>
     </modules>
 
     <dependencies>
