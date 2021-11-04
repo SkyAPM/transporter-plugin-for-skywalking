@@ -41,8 +41,6 @@
 
         <agent.package.dest.dir>${project.build.directory}/../../../../skywalking-agent</agent.package.dest.dir>
         <optional.reporter.plugins.dest.dir>${agent.package.dest.dir}/optional-reporter-plugins</optional.reporter.plugins.dest.dir>
-        <ant-contrib.version>1.0b3</ant-contrib.version>
-        <ant-nodeps.version>1.8.1</ant-nodeps.version>
 
         <shade.package>org.skyapm.transporter.reporter.dependencies</shade.package>
     </properties>

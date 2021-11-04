@@ -21,10 +21,6 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <properties>
-        <ant-contrib.version>1.0b3</ant-contrib.version>
-        <ant-nodeps.version>1.8.1</ant-nodeps.version>
-    </properties>
     <parent>
         <groupId>org.openskywalking</groupId>
         <artifactId>transporter-plugins</artifactId>
