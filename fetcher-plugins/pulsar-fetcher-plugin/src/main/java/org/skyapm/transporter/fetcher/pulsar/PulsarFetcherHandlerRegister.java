@@ -47,7 +47,6 @@ public class PulsarFetcherHandlerRegister {
 
         try {
             client = PulsarClient.builder()
-                                 .serviceUrl(config.getBootstrapServers())
                                  .loadConf(config.getPulsarClientConfig())
                                  .build();
         } catch (PulsarClientException e) {
@@ -77,7 +76,6 @@ public class PulsarFetcherHandlerRegister {
             consumer = client.newConsumer()
                              .loadConf(config.getPulsarConsumerConfig())
                              .topics(handlerMap.keySet().asList())
-                             .subscriptionName(config.getSubscription())
                              .messageListener((MessageListener<byte[]>) (consumer, msg) -> {
                                  log.info("Get data from pulsar, begin to handle.");
                                  try {
