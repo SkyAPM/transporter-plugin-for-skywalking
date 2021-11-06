@@ -20,7 +20,6 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
-    container_name: rmqnamesrv
     expose:
       - 9876
     networks:
@@ -38,7 +37,6 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
-    container_name: rmqbroker
     expose:
       - 10909
       - 10911
