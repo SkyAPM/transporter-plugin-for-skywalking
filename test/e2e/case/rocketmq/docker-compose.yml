@@ -26,6 +26,8 @@ services:
     networks:
       - e2e
     command: sh mqnamesrv
+    volumes:
+      - ./data/namesrv/logs:/home/rocketmq/logs
     healthcheck:
       test: ["CMD", "sh", "-c", "nc -nz 127.0.0.1 9876"]
       interval: 5s
@@ -46,8 +48,14 @@ services:
     environment:
       NAMESRV_ADDR: namesrv:9876
     volumes:
+      - ./data/broker/logs:/home/rocketmq/logs
       - ./data/broker.conf:/opt/rocketmq-4.7.1/conf/broker.conf
     command: sh mqbroker -c /opt/rocketmq-4.7.1/conf/broker.conf
+    healthcheck:
+      test: ["CMD", "sh", "-c", "nc -nz 127.0.0.1 10909"]
+      interval: 5s
+      timeout: 60s
+      retries: 120
     depends_on:
       namesrv:
         condition: service_healthy
@@ -65,6 +73,8 @@ services:
       - 12800
     depends_on:
       namesrv:
+        condition: service_healthy
+      broker-a:
         condition: service_healthy
 
   provider:
