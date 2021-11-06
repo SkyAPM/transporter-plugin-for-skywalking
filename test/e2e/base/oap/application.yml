@@ -381,7 +381,7 @@ kafka-fetcher:
 pulsar-fetcher:
   selector: ${SW_PULSAR_FETCHER:default}
   default:
-    bootstrapServers: ${SW_PULSAR_FETCHER_SERVERS:"pulsar://pulsarhost:6650"}
+    clientServiceUrl: ${SW_PULSAR_FETCHER_SERVERS:"pulsar://pulsarhost:6650"}
 
 receiver-meter:
   selector: ${SW_RECEIVER_METER:default}

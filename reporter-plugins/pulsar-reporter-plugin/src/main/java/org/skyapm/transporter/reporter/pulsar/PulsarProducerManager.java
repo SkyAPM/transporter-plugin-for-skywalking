@@ -17,6 +17,9 @@
 
 package org.skyapm.transporter.reporter.pulsar;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -61,7 +64,7 @@ import static org.skyapm.transporter.reporter.pulsar.PulsarReporterPluginConfig.
 import static org.skyapm.transporter.reporter.pulsar.PulsarReporterPluginConfig.Plugin.Pulsar.ADMIN_TLS_TRUST_STORE_PATH;
 import static org.skyapm.transporter.reporter.pulsar.PulsarReporterPluginConfig.Plugin.Pulsar.ADMIN_TLS_TRUST_STORE_TYPE;
 import static org.skyapm.transporter.reporter.pulsar.PulsarReporterPluginConfig.Plugin.Pulsar.ADMIN_USE_KEY_STORE_TLS;
-import static org.skyapm.transporter.reporter.pulsar.PulsarReporterPluginConfig.Plugin.Pulsar.BROKER_SERVICE_URL;
+import static org.skyapm.transporter.reporter.pulsar.PulsarReporterPluginConfig.Plugin.Pulsar.CLIENT_SERVICE_URL;
 import static org.skyapm.transporter.reporter.pulsar.PulsarReporterPluginConfig.Plugin.Pulsar.DOMAIN;
 import static org.skyapm.transporter.reporter.pulsar.PulsarReporterPluginConfig.Plugin.Pulsar.NAMESPACE;
 import static org.skyapm.transporter.reporter.pulsar.PulsarReporterPluginConfig.Plugin.Pulsar.WEB_SERVICE_URL;
@@ -73,6 +76,7 @@ import static org.skyapm.transporter.reporter.pulsar.PulsarReporterPluginConfig.
 public class PulsarProducerManager implements BootService, Runnable {
 
     private static final ILog LOGGER = LogManager.getLogger(PulsarProducerManager.class);
+    private static final Gson GSON = new Gson();
 
     private Set<String> topics = new HashSet<>();
     private List<PulsarConnectionStatusListener> listeners = new ArrayList<>();
@@ -107,22 +111,25 @@ public class PulsarProducerManager implements BootService, Runnable {
             return;
         }
 
+        Map<String, Object> clientConfig = PulsarReporterPluginConfig.Plugin.Pulsar.getPulsarClientConfigMap();
         //create pulsar client
         try {
-            LOGGER.debug("connect to pulsar cluster '{}'", BROKER_SERVICE_URL);
+            LOGGER.debug("connect to pulsar cluster '{}', config is {}", CLIENT_SERVICE_URL, GSON.toJson(clientConfig));
             pulsarClient = PulsarClient.builder()
-                                       .loadConf(PulsarReporterPluginConfig.Plugin.Pulsar.PULSAR_CLIENT_CONFIG)
-                                       .serviceUrl(BROKER_SERVICE_URL)
+                                       .loadConf(clientConfig)
                                        .build();
         } catch (PulsarClientException e) {
-            LOGGER.error(e, "connect to pulsar cluster '{}' failed", BROKER_SERVICE_URL);
+            LOGGER.error(e, "connect to pulsar cluster '{}' failed, config is {}", CLIENT_SERVICE_URL,
+                         GSON.toJson(clientConfig)
+            );
             return;
         }
 
         //create producer for pulsar topic
+        Map<String, Object> producerConfig = PulsarReporterPluginConfig.Plugin.Pulsar.getProducerDefaultConfig();
         Set<String> errorTopics = topics.stream().map(entry -> {
             Producer<byte[]> producer = getProducer(
-                entry, PulsarReporterPluginConfig.Plugin.Pulsar.PRODUCER_DEFAULT_CONFIG);
+                entry, producerConfig);
             if (producer == null) {
                 return entry;
             } else {
@@ -192,8 +199,8 @@ public class PulsarProducerManager implements BootService, Runnable {
                                                     .readTimeout(ADMIN_READ_TIMEOUT, TimeUnit.SECONDS)
                                                     .requestTimeout(ADMIN_REQUEST_TIMEOUT, TimeUnit.SECONDS)
                                                     .sslProvider(ADMIN_SSL_PROVIDER)
-                                                    .tlsCiphers(ADMIN_TLS_CIPHERS)
-                                                    .tlsProtocols(ADMIN_TLS_PROTOCOLS)
+                                                    .tlsCiphers(getSetFromJson(ADMIN_TLS_CIPHERS))
+                                                    .tlsProtocols(getSetFromJson(ADMIN_TLS_PROTOCOLS))
                                                     .tlsTrustStorePassword(ADMIN_TLS_TRUST_STORE_PASSWORD)
                                                     .tlsTrustStorePath(ADMIN_TLS_TRUST_STORE_PATH)
                                                     .tlsTrustStoreType(ADMIN_TLS_TRUST_STORE_TYPE);
@@ -205,6 +212,12 @@ public class PulsarProducerManager implements BootService, Runnable {
             LOGGER.error(e, "create pulsar admin client from '{}' failed", WEB_SERVICE_URL);
             return null;
         }
+    }
+
+    private Set<String> getSetFromJson(String json) {
+        Type type = new TypeToken<HashSet<String>>() {
+        }.getType();
+        return GSON.fromJson(json, type);
     }
 
     private void notifyListeners(PulsarConnectionStatus status) {
