@@ -16,5 +16,5 @@
 #
 FROM apache/skywalking-oap-server:8.7.0-es6
 
-COPY ./fetcher-plugins/pulsar-fetcher-plugin/target/pulsar-fetcher-plugin-1.0.0-shaded.jar /skywalking/oap-libs/
-COPY ./test/e2e/case/pulsar/base/oap/application.yml /skywalking/config/application.yml
+COPY ./fetcher-plugins/pulsar-fetcher-plugin/target/pulsar-fetcher-plugin-*.*.*-shaded.jar /skywalking/oap-libs/
+COPY ./test/e2e/base/oap/application.yml /skywalking/config/application.yml

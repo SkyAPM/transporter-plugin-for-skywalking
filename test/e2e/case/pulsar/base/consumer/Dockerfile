@@ -17,7 +17,7 @@
 
 FROM apache/skywalking-java-agent:8.7.0-jdk8
 
-COPY ./reporter-plugins/pulsar-reporter-plugin/target/pulsar-reporter-plugin-1.0.0-shaded.jar /skywalking/agent/plugins/
+COPY ./reporter-plugins/pulsar-reporter-plugin/target/pulsar-reporter-plugin-*.*.*-shaded.jar /skywalking/agent/plugins/
 
 VOLUME /services
 ADD ./test/e2e/base/consumer/target/e2e-service-consumer.jar /services/

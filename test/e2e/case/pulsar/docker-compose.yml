@@ -51,7 +51,7 @@ services:
     ports:
       - 9090
     environment:
-      SW_PULSAR_BROKER_SERVICE_URL: pulsar://pulsar-a:6650
+      SW_PULSAR_CLIENT_SERVICE_URL: pulsar://pulsar-a:6650
       SW_PULSAR_WEB_SERVICE_URL: http://pulsar-a:8080
     depends_on:
       oap:
@@ -65,7 +65,7 @@ services:
       - 9090
     environment:
       PROVIDER_URL: http://provider:9090
-      SW_PULSAR_BROKER_SERVICE_URL: pulsar://pulsar-a:6650
+      SW_PULSAR_CLIENT_SERVICE_URL: pulsar://pulsar-a:6650
       SW_PULSAR_WEB_SERVICE_URL: http://pulsar-a:8080
     depends_on:
       provider:
