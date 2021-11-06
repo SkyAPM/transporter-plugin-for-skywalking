@@ -8,8 +8,8 @@ The Apache SkyWalking officially provides gRPC and Kafka as official transporter
 
   The current Pulsar Transporter plugin is based on `pulsar 2.8.0` and `SkyWalking OAP server and Java Agent 8.7.0`.
     
-    * [OAP fetcher](docs/en/pulsar/Pulsar-Reporter.md)
-    * [Java agent reporter](docs/en/pulsar/Pulsar-Fetcher.md)
+    * [OAP fetcher](docs/en/pulsar/Pulsar-Fetcher.md)
+    * [Java agent reporter](docs/en/pulsar/Pulsar-Reporter.md)
 
 
 ## License
