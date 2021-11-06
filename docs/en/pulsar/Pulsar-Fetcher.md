@@ -1,5 +1,5 @@
 # Pulsar Fetcher
-The Pulsar Fetcher plugin is based on `pulsar 2.8.0` and `Skywalking 8.7.0`. In Pulsar Fetcher, tracing segments, service/instance properties, JVM metrics, and meter system data are supported. Pulsar Fetcher can work with gRPC/HTTP Receivers at the same time for adopting different transport protocols.
+In Pulsar Fetcher, tracing segments, service/instance properties, JVM metrics, and meter system data are supported. Pulsar Fetcher can work with gRPC/HTTP Receivers at the same time for adopting different transport protocols.
 
 Pulsar Fetcher is disabled by default. To enable it, you need to move the jar `pulsar-fetcher-plugin-x.y.z.jar` to `oap-libs/` and configure as follows. All configurations of the Pulsar Fetcher plugin should be added to the file `application.yml`.
 ```

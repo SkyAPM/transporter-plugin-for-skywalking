@@ -1,5 +1,5 @@
 # Pulsar Reporter
-The Pulsar reporter plugin is based on `pulsar 2.8.0` and `Skywalking 8.7.0`. It supports report traces, JVM metrics, Instance Properties, and profiled snapshots to Pulsar cluster, which is disabled in default. Add the jar `pulsar-reporter-plugin-x.y.z.jar` to agent/plugins for activating. All configurations of the Pulsar Reporter plugin should be added to the file `agent.config`.
+It supports report traces, JVM metrics, Instance Properties, and profiled snapshots to Pulsar cluster, which is disabled in default. Add the jar `pulsar-reporter-plugin-x.y.z.jar` to agent/plugins for activating. All configurations of the Pulsar Reporter plugin should be added to the file `agent.config`.
 
 ## Basic Configurations
 Similar to Kafka reporter, GRPC receiver needs to be configured for delivering the task of profiling in the Pulsar Reporter. The following configure cannot be omitted.
