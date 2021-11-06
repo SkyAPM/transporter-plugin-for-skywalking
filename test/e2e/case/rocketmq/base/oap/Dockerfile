@@ -16,5 +16,5 @@
 #
 FROM apache/skywalking-oap-server:8.7.0-es6
 
-COPY ./fetcher-plugins/rocketmq-fetcher-plugin/target/rocketmq-fetcher-plugin-1.0.0-shaded.jar /skywalking/oap-libs/
+COPY ./fetcher-plugins/rocketmq-fetcher-plugin/target/rocketmq-fetcher-plugin-*.*.*-shaded.jar /skywalking/oap-libs/
 COPY ./test/e2e/case/rocketmq/base/oap/application.yml /skywalking/config/application.yml
