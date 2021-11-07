@@ -27,13 +27,12 @@
     <packaging>jar</packaging>
     <artifactId>rocketmq-fetcher-plugin</artifactId>
 
-
     <dependencies>
         <dependency>
             <groupId>org.apache.skywalking</groupId>
-            <artifactId>library-module</artifactId>
+            <artifactId>log-analyzer</artifactId>
             <version>${skywalking.version}</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
@@ -41,28 +40,9 @@
             <version>${rocketmq-clients.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.skywalking</groupId>
-            <artifactId>server-core</artifactId>
-            <version>${skywalking.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.skywalking</groupId>
-            <artifactId>agent-analyzer</artifactId>
-            <version>${skywalking.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.skywalking</groupId>
-            <artifactId>log-analyzer</artifactId>
-            <version>${skywalking.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-tools</artifactId>
             <version>${rocketmq-clients.version}</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 

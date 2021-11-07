@@ -85,8 +85,7 @@ public class RocketmqFetcherHandlerRegister implements Runnable {
             try {
                 consumer.subscribe(topic, "*");
             } catch (MQClientException e) {
-                log.error("skywalking consumer subscribe topic {} fail", topic);
-                e.printStackTrace();
+                log.error("skywalking consumer fail to subscribe topic " +  topic, e);
             }
         });
         consumer.setPullBatchSize(config.getPullBatchSize());
@@ -95,8 +94,7 @@ public class RocketmqFetcherHandlerRegister implements Runnable {
         try {
             consumer.start();
         } catch (MQClientException e) {
-            log.error("rocketmq consumer start failed");
-            e.printStackTrace();
+            log.error("rocketmq consumer start failed", e);
         }
         executor.submit(this);
     }
@@ -113,7 +111,6 @@ public class RocketmqFetcherHandlerRegister implements Runnable {
                 consumer.commitSync();
             } catch (Exception e) {
                 log.error("rocketmq handle message error", e);
-                e.printStackTrace();
             }
         }
     }
