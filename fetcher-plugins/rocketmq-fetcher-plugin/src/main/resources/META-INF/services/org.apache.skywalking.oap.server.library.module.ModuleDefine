@@ -15,11 +15,4 @@
 #
 #
 
-{{- contains . }}
-- id: {{ b64enc "e2e-service-consumer" }}.1
-    name: e2e-service-consumer
-    group: ""
-- id: {{ b64enc "e2e-service-provider" }}.1
-  name: e2e-service-provider
-  group: ""
-{{- end }}
+org.skyapm.transporter.fetcher.rocketmq.module.RocketmqFetcherModule

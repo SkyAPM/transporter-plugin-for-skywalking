@@ -20,9 +20,10 @@ version: '2.1'
 services:
 
   oap:
+    image: ghcr.io/apache/skywalking/oap:1730f2c84bbd4da999ec2c74d1c26db31d5a0d24
     build:
-      context: ../../../
-      dockerfile: ./test/e2e/base/oap/Dockerfile
+      context: ../../../../../
+      dockerfile: ./test/e2e/case/pulsar/base/oap/Dockerfile
     expose:
       - 11800
       - 12800
@@ -37,8 +38,8 @@ services:
 
   provider:
     build:
-      context: ../../../
-      dockerfile: ./test/e2e/base/provider/Dockerfile
+      context: ../../../../../
+      dockerfile: ./test/e2e/case/pulsar/base/provider/Dockerfile
     expose:
       - 9090
     networks:
@@ -58,13 +59,14 @@ services:
 
   consumer:
     build:
-      context: ../../../
-      dockerfile: ./test/e2e/base/consumer/Dockerfile
+      context: ../../../../../
+      dockerfile: ./test/e2e/case/pulsar/base/consumer/Dockerfile
     expose:
       - 9090
     networks:
       - e2e
     environment:
+      PROVIDER_URL: http://provider:9090
       SW_AGENT_COLLECTOR_BACKEND_SERVICES: oap:11800
       SW_AGENT_NAME: e2e-service-consumer
       SW_AGENT_INSTANCE_NAME: consumer1

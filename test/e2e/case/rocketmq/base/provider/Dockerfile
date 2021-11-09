@@ -15,11 +15,14 @@
 #
 #
 
-{{- contains . }}
-- id: {{ b64enc "e2e-service-consumer" }}.1
-    name: e2e-service-consumer
-    group: ""
-- id: {{ b64enc "e2e-service-provider" }}.1
-  name: e2e-service-provider
-  group: ""
-{{- end }}
+FROM apache/skywalking-java-agent:8.7.0-jdk8
+
+COPY ./reporter-plugins/rocketmq-reporter-plugin/target/rocketmq-reporter-plugin-*.*.*-shaded.jar /skywalking/agent/plugins/
+
+VOLUME /services
+COPY ./test/e2e/base/provider/agent.config /skywalking/agent/config/agent.config
+ADD ./test/e2e/base/provider/target/e2e-service-provider.jar /services/
+
+ENV JAVA_OPTS=""
+
+CMD ["sh", "-c", "java $JAVA_OPTS -jar /services/e2e-service-provider.jar"]

@@ -1,5 +1,4 @@
-#
-# Copyright 2021 SkyAPM
+#  Copyright 2021 SkyAPM
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,9 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-#
-FROM apache/skywalking-oap-server:8.7.0-es6
 
-COPY ./fetcher-plugins/pulsar-fetcher-plugin/target/pulsar-fetcher-plugin-*.*.*-shaded.jar /skywalking/oap-libs/
-COPY ./test/e2e/base/oap/application.yml /skywalking/config/application.yml
+#
+
+org.skyapm.transporter.reporter.rocketmq.RocketmqProducerManager
+org.skyapm.transporter.reporter.rocketmq.RocketmqContextManagerExtendService
+org.skyapm.transporter.reporter.rocketmq.RocketmqServiceManagementServiceClient
+org.skyapm.transporter.reporter.rocketmq.RocketmqJVMMetricsSender
+org.skyapm.transporter.reporter.rocketmq.RocketmqTraceSegmentServiceClient
+org.skyapm.transporter.reporter.rocketmq.RocketmqProfileSnapshotSender
+org.skyapm.transporter.reporter.rocketmq.RocketmqMeterSender

@@ -22,6 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>pulsar-reporter-plugin</module>
+        <module>rocketmq-reporter-plugin</module>
     </modules>
 
     <parent>
@@ -36,8 +37,11 @@
     <packaging>pom</packaging>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <agent.package.dest.dir>${project.build.directory}/../../../../skywalking-agent</agent.package.dest.dir>
         <optional.reporter.plugins.dest.dir>${agent.package.dest.dir}/optional-reporter-plugins</optional.reporter.plugins.dest.dir>
+
         <shade.package>org.skyapm.transporter.reporter.dependencies</shade.package>
     </properties>
 

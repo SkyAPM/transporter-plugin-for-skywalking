@@ -14,12 +14,7 @@
 # limitations under the License.
 #
 #
+FROM apache/skywalking-oap-server:8.7.0-es6
 
-{{- contains . }}
-- id: {{ b64enc "e2e-service-consumer" }}.1
-    name: e2e-service-consumer
-    group: ""
-- id: {{ b64enc "e2e-service-provider" }}.1
-  name: e2e-service-provider
-  group: ""
-{{- end }}
+COPY ./fetcher-plugins/rocketmq-fetcher-plugin/target/rocketmq-fetcher-plugin-*.*.*-shaded.jar /skywalking/oap-libs/
+COPY ./test/e2e/case/rocketmq/base/oap/application.yml /skywalking/config/application.yml

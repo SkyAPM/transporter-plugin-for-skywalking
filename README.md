@@ -11,6 +11,12 @@ The Apache SkyWalking officially provides gRPC and Kafka as official transporter
     * [OAP fetcher](docs/en/pulsar/Pulsar-Fetcher.md)
     * [Java agent reporter](docs/en/pulsar/Pulsar-Reporter.md)
 
+* Rocketmq Transporter
 
+  The current Rocketmq Transporter plugin is based on `rocketmq 4.7.1` and `SkyWalking OAP server and Java Agent 8.7.0`.
+    
+    * [OAP fetcher](docs/en/rocketmq/Rocketmq-Fetcher.md)
+    * [Java agent reporter](docs/en/rocketmq/Rocketmq-Reporter.md)
+    
 ## License
 Apache 2.0

@@ -34,7 +34,7 @@ services:
 
   oap:
     extends:
-      file: ../../base/base-compose.yml
+      file: ./base/base-compose.yml
       service: oap
     ports:
       - 12800
@@ -46,7 +46,7 @@ services:
 
   provider:
     extends:
-      file: ../../base/base-compose.yml
+      file: ./base/base-compose.yml
       service: provider
     ports:
       - 9090
@@ -59,7 +59,7 @@ services:
 
   consumer:
     extends:
-      file: ../../base/base-compose.yml
+      file: ./base/base-compose.yml
       service: consumer
     ports:
       - 9090
