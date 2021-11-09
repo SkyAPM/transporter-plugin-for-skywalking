@@ -31,7 +31,7 @@ import org.skyapm.transporter.fetcher.rocketmq.mock.MockModuleManager;
 import org.skyapm.transporter.fetcher.rocketmq.mock.MockModuleProvider;
 import org.skyapm.transporter.fetcher.rocketmq.module.RocketmqFetcherConfig;
 import org.skyapm.transporter.fetcher.rocketmq.provider.hander.RocketmqHandler;
-import org.skyapm.transporter.fetcher.rocketmq.provider.hander.RocketmqServiceManagementHandler;
+import org.skyapm.transporter.fetcher.rocketmq.provider.hander.ServiceManagementHandler;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -39,7 +39,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class RocketmqServiceManagementHandlerTest {
+public class ServiceManagementHandlerTest {
     private static final String TOPIC_NAME = "skywalking-managements";
 
     private static final String SERVICE = "MOCK_SERVER";
@@ -77,7 +77,7 @@ public class RocketmqServiceManagementHandlerTest {
                 });
             }
         };
-        handler = new RocketmqServiceManagementHandler(manager, config);
+        handler = new ServiceManagementHandler(manager, config);
     }
 
     @Test

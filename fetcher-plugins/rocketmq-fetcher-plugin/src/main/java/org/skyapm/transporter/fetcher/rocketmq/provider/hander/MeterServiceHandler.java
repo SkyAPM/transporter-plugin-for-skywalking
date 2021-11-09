@@ -35,13 +35,13 @@ import org.skyapm.transporter.fetcher.rocketmq.module.RocketmqFetcherConfig;
  * A handler deserializes the message of meter system data and pushes it to downstream.
  */
 @Slf4j
-public class RocketmqMeterServiceHandler extends AbstractRocketmqHandler {
+public class MeterServiceHandler extends AbstractRocketmqHandler {
     private final IMeterProcessService processService;
     private final HistogramMetrics histogram;
     private final HistogramMetrics histogramBatch;
     private final CounterMetrics errorCounter;
 
-    public RocketmqMeterServiceHandler(ModuleManager manager, RocketmqFetcherConfig config) {
+    public MeterServiceHandler(ModuleManager manager, RocketmqFetcherConfig config) {
         super(manager, config);
         this.processService = manager.find(AnalyzerModule.NAME).provider().getService(IMeterProcessService.class);
         MetricsCreator metricsCreator = manager.find(TelemetryModule.NAME)

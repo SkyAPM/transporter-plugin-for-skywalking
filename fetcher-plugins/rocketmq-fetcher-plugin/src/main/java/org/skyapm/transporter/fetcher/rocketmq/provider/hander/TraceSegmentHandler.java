@@ -35,13 +35,13 @@ import org.skyapm.transporter.fetcher.rocketmq.module.RocketmqFetcherConfig;
  * A handler deserializes the message of the trace segment data and pushes it to downstream.
  */
 @Slf4j
-public class RocketmqTraceSegmentHandler extends AbstractRocketmqHandler {
+public class TraceSegmentHandler extends AbstractRocketmqHandler {
     private final ISegmentParserService segmentParserService;
 
     private final HistogramMetrics histogram;
     private final CounterMetrics errorCounter;
 
-    public RocketmqTraceSegmentHandler(ModuleManager moduleManager, RocketmqFetcherConfig config) {
+    public TraceSegmentHandler(ModuleManager moduleManager, RocketmqFetcherConfig config) {
         super(moduleManager, config);
         this.segmentParserService = moduleManager.find(AnalyzerModule.NAME)
                 .provider()

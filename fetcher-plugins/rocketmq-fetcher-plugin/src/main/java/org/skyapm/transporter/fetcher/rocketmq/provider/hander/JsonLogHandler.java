@@ -27,10 +27,10 @@ import org.skyapm.transporter.fetcher.rocketmq.module.RocketmqFetcherConfig;
 import java.io.IOException;
 
 @Slf4j
-public class RocketmqJsonLogHandler extends RocketmqLogHandler {
+public class JsonLogHandler extends LogHandler {
     private final RocketmqFetcherConfig config;
 
-    public RocketmqJsonLogHandler(ModuleManager moduleManager, RocketmqFetcherConfig config) {
+    public JsonLogHandler(ModuleManager moduleManager, RocketmqFetcherConfig config) {
         super(moduleManager, config);
         this.config = config;
     }

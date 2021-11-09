@@ -31,14 +31,14 @@ import org.apache.skywalking.oap.server.telemetry.api.MetricsTag;
 import org.skyapm.transporter.fetcher.rocketmq.module.RocketmqFetcherConfig;
 
 @Slf4j
-public class RocketmqLogHandler extends AbstractRocketmqHandler {
+public class LogHandler extends AbstractRocketmqHandler {
 
     private final RocketmqFetcherConfig config;
     private final HistogramMetrics histogram;
     private final CounterMetrics errorCounter;
     private final ILogAnalyzerService logAnalyzerService;
 
-    public RocketmqLogHandler(ModuleManager moduleManager, RocketmqFetcherConfig config) {
+    public LogHandler(ModuleManager moduleManager, RocketmqFetcherConfig config) {
         super(moduleManager, config);
         this.config = config;
         this.logAnalyzerService = moduleManager.find(LogAnalyzerModule.NAME)

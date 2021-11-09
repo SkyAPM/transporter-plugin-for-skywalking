@@ -41,7 +41,7 @@ import org.apache.skywalking.oap.server.telemetry.none.MetricsCreatorNoop;
 import org.skyapm.transporter.fetcher.rocketmq.mock.MockModuleManager;
 import org.skyapm.transporter.fetcher.rocketmq.mock.MockModuleProvider;
 import org.skyapm.transporter.fetcher.rocketmq.module.RocketmqFetcherConfig;
-import org.skyapm.transporter.fetcher.rocketmq.provider.hander.RocketmqJVMMetricsHandler;
+import org.skyapm.transporter.fetcher.rocketmq.provider.hander.JVMMetricsHandler;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -51,9 +51,9 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 
-public class RocketmqJVMMetricsHandlerTest {
+public class JVMMetricsHandlerTest {
     private static final String TOPIC_NAME = "skywalking-metrics";
-    private RocketmqJVMMetricsHandler handler = null;
+    private JVMMetricsHandler handler = null;
     private RocketmqFetcherConfig config = new RocketmqFetcherConfig();
 
     private ModuleManager manager;
@@ -93,7 +93,7 @@ public class RocketmqJVMMetricsHandlerTest {
                 });
             }
         };
-        handler = new RocketmqJVMMetricsHandler(manager, config);
+        handler = new JVMMetricsHandler(manager, config);
     }
 
     @Test

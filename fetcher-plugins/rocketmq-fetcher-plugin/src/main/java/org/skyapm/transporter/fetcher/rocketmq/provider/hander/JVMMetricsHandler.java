@@ -35,7 +35,7 @@ import org.skyapm.transporter.fetcher.rocketmq.module.RocketmqFetcherConfig;
  * A handler deserializes the message of JVM Metrics and pushes it to downstream.
  */
 @Slf4j
-public class RocketmqJVMMetricsHandler extends AbstractRocketmqHandler {
+public class JVMMetricsHandler extends AbstractRocketmqHandler {
     private final NamingControl namingLengthControl;
     private final JVMSourceDispatcher jvmSourceDispatcher;
 
@@ -43,7 +43,7 @@ public class RocketmqJVMMetricsHandler extends AbstractRocketmqHandler {
     private final HistogramMetrics histogramBatch;
     private final CounterMetrics errorCounter;
 
-    public RocketmqJVMMetricsHandler(ModuleManager manager, RocketmqFetcherConfig config) {
+    public JVMMetricsHandler(ModuleManager manager, RocketmqFetcherConfig config) {
         super(manager, config);
         this.jvmSourceDispatcher = new JVMSourceDispatcher(manager);
         this.namingLengthControl = manager.find(CoreModule.NAME)

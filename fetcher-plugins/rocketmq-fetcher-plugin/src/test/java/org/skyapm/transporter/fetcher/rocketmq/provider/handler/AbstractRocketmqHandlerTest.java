@@ -40,15 +40,15 @@ public class AbstractRocketmqHandlerTest {
 
         MockRocketmqHandler kafkaHandler = new MockRocketmqHandler(plainTopic, manager, config);
 
-        //  unset namespace
+        // unset namespace
         assertEquals(kafkaHandler.getTopic(), plainTopic);
 
-        //set namespace only
+        // set namespace only
         String namespace = "product";
         config.setNamespace(namespace);
         assertEquals(namespace + "-" + plainTopic, kafkaHandler.getTopic());
 
-        //set namespace
+        // set namespace
         config.setNamespace(namespace);
     }
 

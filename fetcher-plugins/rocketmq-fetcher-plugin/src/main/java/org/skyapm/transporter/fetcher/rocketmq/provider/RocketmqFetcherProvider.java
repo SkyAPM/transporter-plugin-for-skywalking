@@ -30,13 +30,13 @@ import org.apache.skywalking.oap.server.telemetry.TelemetryModule;
 import org.skyapm.transporter.fetcher.rocketmq.RocketmqFetcherHandlerRegister;
 import org.skyapm.transporter.fetcher.rocketmq.module.RocketmqFetcherConfig;
 import org.skyapm.transporter.fetcher.rocketmq.module.RocketmqFetcherModule;
-import org.skyapm.transporter.fetcher.rocketmq.provider.hander.RocketmqJVMMetricsHandler;
-import org.skyapm.transporter.fetcher.rocketmq.provider.hander.RocketmqJsonLogHandler;
-import org.skyapm.transporter.fetcher.rocketmq.provider.hander.RocketmqLogHandler;
-import org.skyapm.transporter.fetcher.rocketmq.provider.hander.RocketmqMeterServiceHandler;
-import org.skyapm.transporter.fetcher.rocketmq.provider.hander.RocketmqProfileTaskHandler;
-import org.skyapm.transporter.fetcher.rocketmq.provider.hander.RocketmqServiceManagementHandler;
-import org.skyapm.transporter.fetcher.rocketmq.provider.hander.RocketmqTraceSegmentHandler;
+import org.skyapm.transporter.fetcher.rocketmq.provider.hander.JVMMetricsHandler;
+import org.skyapm.transporter.fetcher.rocketmq.provider.hander.JsonLogHandler;
+import org.skyapm.transporter.fetcher.rocketmq.provider.hander.LogHandler;
+import org.skyapm.transporter.fetcher.rocketmq.provider.hander.MeterServiceHandler;
+import org.skyapm.transporter.fetcher.rocketmq.provider.hander.ProfileTaskHandler;
+import org.skyapm.transporter.fetcher.rocketmq.provider.hander.ServiceManagementHandler;
+import org.skyapm.transporter.fetcher.rocketmq.provider.hander.TraceSegmentHandler;
 
 @Slf4j
 public class RocketmqFetcherProvider extends ModuleProvider {
@@ -69,17 +69,17 @@ public class RocketmqFetcherProvider extends ModuleProvider {
 
     @Override
     public void start() throws ServiceNotProvidedException, ModuleStartException {
-        handlerRegister.register(new RocketmqJVMMetricsHandler(getManager(), config));
-        handlerRegister.register(new RocketmqServiceManagementHandler(getManager(), config));
-        handlerRegister.register(new RocketmqTraceSegmentHandler(getManager(), config));
-        handlerRegister.register(new RocketmqProfileTaskHandler(getManager(), config));
-        handlerRegister.register(new RocketmqMeterServiceHandler(getManager(), config));
+        handlerRegister.register(new JVMMetricsHandler(getManager(), config));
+        handlerRegister.register(new ServiceManagementHandler(getManager(), config));
+        handlerRegister.register(new TraceSegmentHandler(getManager(), config));
+        handlerRegister.register(new ProfileTaskHandler(getManager(), config));
+        handlerRegister.register(new MeterServiceHandler(getManager(), config));
 
         if (config.isEnableNativeProtoLog()) {
-            handlerRegister.register(new RocketmqLogHandler(getManager(), config));
+            handlerRegister.register(new LogHandler(getManager(), config));
         }
         if (config.isEnableNativeJsonLog()) {
-            handlerRegister.register(new RocketmqJsonLogHandler(getManager(), config));
+            handlerRegister.register(new JsonLogHandler(getManager(), config));
         }
 
         handlerRegister.start();

@@ -35,11 +35,11 @@ import org.skyapm.transporter.fetcher.rocketmq.module.RocketmqFetcherConfig;
  * A handler deserializes the message of profiling snapshot and pushes it to downstream.
  */
 @Slf4j
-public class RocketmqProfileTaskHandler extends AbstractRocketmqHandler {
+public class ProfileTaskHandler extends AbstractRocketmqHandler {
     private final HistogramMetrics histogram;
     private final CounterMetrics errorCounter;
 
-    public RocketmqProfileTaskHandler(ModuleManager manager, RocketmqFetcherConfig config) {
+    public ProfileTaskHandler(ModuleManager manager, RocketmqFetcherConfig config) {
         super(manager, config);
         MetricsCreator metricsCreator = manager.find(TelemetryModule.NAME)
                 .provider()
