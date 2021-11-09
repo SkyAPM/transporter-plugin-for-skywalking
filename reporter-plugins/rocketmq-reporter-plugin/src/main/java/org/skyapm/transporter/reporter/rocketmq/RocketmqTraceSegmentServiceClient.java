@@ -92,7 +92,6 @@ public class RocketmqTraceSegmentServiceClient implements BootService, IConsumer
                 producer.send(message,
                         RocketmqReporterPluginConfig.Plugin.Rocketmq.PRODUCE_TIMEOUT);
             } catch (Exception e) {
-                e.printStackTrace();
                 LOGGER.error("Failed to report TraceSegment.", e);
             }
         });

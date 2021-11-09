@@ -71,7 +71,6 @@ public class RocketmqProfileSnapshotSender extends ProfileSnapshotSender impleme
                         RocketmqReporterPluginConfig.Plugin.Rocketmq.PRODUCE_TIMEOUT
                 );
             } catch (Exception e) {
-                e.printStackTrace();
                 LOGGER.error("Failed to report TracingThreadSnapshot.", e);
             }
         }

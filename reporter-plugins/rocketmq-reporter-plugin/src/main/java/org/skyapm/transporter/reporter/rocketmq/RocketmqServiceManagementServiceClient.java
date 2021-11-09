@@ -104,7 +104,6 @@ public class RocketmqServiceManagementServiceClient implements BootService, Runn
                 producer.send(message,
                         RocketmqReporterPluginConfig.Plugin.Rocketmq.PRODUCE_TIMEOUT);
             } catch (Exception e) {
-                e.printStackTrace();
                 LOGGER.error("Failed to report Management.", e);
             }
         } else {
@@ -121,7 +120,6 @@ public class RocketmqServiceManagementServiceClient implements BootService, Runn
                 producer.send(message,
                         RocketmqReporterPluginConfig.Plugin.Rocketmq.PRODUCE_TIMEOUT);
             } catch (Exception e) {
-                e.printStackTrace();
                 LOGGER.error("Failed to report Heartbeat.", e);
             }
         }

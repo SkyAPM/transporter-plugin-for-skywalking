@@ -68,7 +68,6 @@ public class RocketmqJVMMetricsSender  extends JVMMetricsSender implements Rocke
                             metrics.toByteArray()),
                             RocketmqReporterPluginConfig.Plugin.Rocketmq.PRODUCE_TIMEOUT);
                 } catch (Exception e) {
-                    e.printStackTrace();
                     LOGGER.error("Failed to report JVMMetrics.", e);
                 }
             }
