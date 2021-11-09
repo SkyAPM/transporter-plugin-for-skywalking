@@ -68,7 +68,6 @@ public class RocketmqMeterSender extends MeterSender implements RocketmqConnecti
             producer.send(new Message(topic, builder.build().toByteArray()),
                     RocketmqReporterPluginConfig.Plugin.Rocketmq.PRODUCE_TIMEOUT);
         } catch (Exception e) {
-            e.printStackTrace();
             LOGGER.error("Failed to report Meter.", e);
         }
     }
