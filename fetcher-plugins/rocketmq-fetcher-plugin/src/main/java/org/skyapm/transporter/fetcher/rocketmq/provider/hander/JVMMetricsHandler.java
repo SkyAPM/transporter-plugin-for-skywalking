@@ -53,22 +53,22 @@ public class JVMMetricsHandler extends AbstractRocketmqHandler {
                 .provider()
                 .getService(MetricsCreator.class);
         histogram = metricsCreator.createHistogramMetric(
-                "meter_in_latency",
+                "jvm_metrics_in_latency",
                 "The process latency of meter",
                 new MetricsTag.Keys("protocol"),
-                new MetricsTag.Values("org/skyapm/transporter/fetcher/rocketmq")
+                new MetricsTag.Values("rocketmq")
         );
         histogramBatch = metricsCreator.createHistogramMetric(
-                "meter_in_latency",
+                "jvm_metrics_batch_in_latency",
                 "The process latency of meter",
                 new MetricsTag.Keys("protocol"),
-                new MetricsTag.Values("org/skyapm/transporter/fetcher/rocketmq")
+                new MetricsTag.Values("rocketmq")
         );
         errorCounter = metricsCreator.createCounter(
                 "meter_analysis_error_count",
                 "The error number of meter analysis",
                 new MetricsTag.Keys("protocol"),
-                new MetricsTag.Values("org/skyapm/transporter/fetcher/rocketmq")
+                new MetricsTag.Values("rocketmq")
         );
     }
 

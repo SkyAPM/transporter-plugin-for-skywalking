@@ -52,13 +52,13 @@ public class LogHandler extends AbstractRocketmqHandler {
                 "log_in_latency",
                 "The process latency of log",
                 new MetricsTag.Keys("protocol", "data_format"),
-                new MetricsTag.Values("org/skyapm/transporter/fetcher/rocketmq", getDataFormat())
+                new MetricsTag.Values("rocketmq", getDataFormat())
         );
         errorCounter = metricsCreator.createCounter(
                 "log_analysis_error_count",
                 "The error number of log analysis",
                 new MetricsTag.Keys("protocol", "data_format"),
-                new MetricsTag.Values("org/skyapm/transporter/fetcher/rocketmq", getDataFormat())
+                new MetricsTag.Values("rocketmq", getDataFormat())
         );
     }
 

@@ -48,13 +48,13 @@ public class ProfileTaskHandler extends AbstractRocketmqHandler {
                 "profile_task_in_latency",
                 "The process latency of profile task",
                 new MetricsTag.Keys("protocol"),
-                new MetricsTag.Values("org/skyapm/transporter/fetcher/rocketmq")
+                new MetricsTag.Values("rocketmq")
         );
         errorCounter = metricsCreator.createCounter(
                 "profile_task_analysis_error_count",
                 "The error number of profile task process",
                 new MetricsTag.Keys("protocol"),
-                new MetricsTag.Values("org/skyapm/transporter/fetcher/rocketmq")
+                new MetricsTag.Values("rocketmq")
         );
     }
 

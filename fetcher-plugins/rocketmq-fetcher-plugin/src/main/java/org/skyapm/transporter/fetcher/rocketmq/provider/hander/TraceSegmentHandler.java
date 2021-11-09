@@ -54,13 +54,13 @@ public class TraceSegmentHandler extends AbstractRocketmqHandler {
                 "trace_in_latency",
                 "The process latency of trace data",
                 new MetricsTag.Keys("protocol"),
-                new MetricsTag.Values("org/skyapm/transporter/fetcher/rocketmq")
+                new MetricsTag.Values("rocketmq")
         );
         errorCounter = metricsCreator.createCounter(
                 "trace_analysis_error_count",
                 "The error number of trace analysis",
                 new MetricsTag.Keys("protocol"),
-                new MetricsTag.Values("org/skyapm/transporter/fetcher/rocketmq")
+                new MetricsTag.Values("rocketmq")
         );
     }
 
