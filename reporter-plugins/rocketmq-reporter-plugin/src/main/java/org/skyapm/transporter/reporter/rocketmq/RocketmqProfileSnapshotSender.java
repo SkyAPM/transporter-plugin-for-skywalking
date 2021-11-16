@@ -34,7 +34,7 @@ import java.util.List;
  * to report the tracing profile snapshot data by Rocketmq cluster.
  */
 @OverrideImplementor(ProfileSnapshotSender.class)
-public class RocketmqProfileSnapshotSender extends ProfileSnapshotSender implements RocketmqConnectionStatusListener  {
+public class RocketmqProfileSnapshotSender extends ProfileSnapshotSender implements RocketmqConnectionStatusListener {
     private static final ILog LOGGER = LogManager.getLogger(RocketmqProfileSnapshotSender.class);
 
     private String topic;

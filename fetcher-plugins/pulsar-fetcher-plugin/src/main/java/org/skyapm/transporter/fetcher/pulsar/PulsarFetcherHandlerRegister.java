@@ -50,7 +50,7 @@ public class PulsarFetcherHandlerRegister {
                                  .loadConf(config.getPulsarClientConfig())
                                  .build();
         } catch (PulsarClientException e) {
-            e.printStackTrace();
+           log.error("pulsar client build failed", e);
         }
         if (config.getPulsarHandlerThreadPoolSize() > 0) {
             threadPoolSize = config.getPulsarHandlerThreadPoolSize();

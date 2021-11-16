@@ -28,6 +28,11 @@
     </module>
 
     <module name="RegexpSingleline">
+        <property name="format" value="e\.printStackTrace"/>
+        <property name="message" value="Prohibit invoking e.printStackTrace in source code !"/>
+    </module>
+
+    <module name="RegexpSingleline">
         <property name="format" value="System\.out\.println"/>
         <property name="message" value="Prohibit invoking System.out.println in source code !"/>
     </module>
@@ -91,6 +96,8 @@
         <module name="TypeName">
             <property name="format" value="(^[A-Z][a-zA-Z0-9]*$)|(^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$)"/>
         </module>
+        <module name="MissingOverride"/>
+        <module name="NoLineWrap"/>
 
         <!--whitespace-->
         <module name="GenericWhitespace"/>
@@ -99,6 +106,7 @@
         <module name="MethodParamPad"/>
         <module name="ParenPad"/>
         <module name="TypecastParenPad"/>
+        <module name="SingleSpaceSeparator"/>
         <module name="EmptyLineSeparator">
             <property name="allowNoEmptyLineBetweenFields" value="true"/>
             <property name="allowMultipleEmptyLines" value="false"/>

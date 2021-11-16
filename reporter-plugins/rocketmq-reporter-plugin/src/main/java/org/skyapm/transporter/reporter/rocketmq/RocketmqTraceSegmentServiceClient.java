@@ -42,7 +42,7 @@ import static org.apache.skywalking.apm.agent.core.conf.Config.Buffer.CHANNEL_SI
  * A tracing segment data reporter.
  */
 @OverrideImplementor(TraceSegmentServiceClient.class)
-public class RocketmqTraceSegmentServiceClient implements BootService, IConsumer<TraceSegment>, TracingContextListener, RocketmqConnectionStatusListener  {
+public class RocketmqTraceSegmentServiceClient implements BootService, IConsumer<TraceSegment>, TracingContextListener, RocketmqConnectionStatusListener {
     private static final ILog LOGGER = LogManager.getLogger(RocketmqTraceSegmentServiceClient.class);
 
     private String topic;

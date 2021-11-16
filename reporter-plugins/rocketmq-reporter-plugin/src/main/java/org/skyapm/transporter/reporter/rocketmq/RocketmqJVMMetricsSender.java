@@ -37,7 +37,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * A report to send JVM Metrics data rocketmq cluster.
  */
 @OverrideImplementor(JVMMetricsSender.class)
-public class RocketmqJVMMetricsSender  extends JVMMetricsSender implements RocketmqConnectionStatusListener {
+public class RocketmqJVMMetricsSender extends JVMMetricsSender implements RocketmqConnectionStatusListener {
     private static final ILog LOGGER = LogManager.getLogger(RocketmqJVMMetricsSender.class);
     private DefaultMQProducer producer;
     private String topic;
