@@ -85,7 +85,7 @@ public class RocketmqFetcherHandlerRegister implements Runnable {
             try {
                 consumer.subscribe(topic, "*");
             } catch (MQClientException e) {
-                log.error("skywalking consumer fail to subscribe topic " +  topic, e);
+                log.error("skywalking consumer fail to subscribe topic " + topic, e);
             }
         });
         consumer.setPullBatchSize(config.getPullBatchSize());

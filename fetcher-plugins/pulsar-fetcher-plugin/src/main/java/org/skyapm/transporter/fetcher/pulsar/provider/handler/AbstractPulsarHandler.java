@@ -34,7 +34,7 @@ public abstract class AbstractPulsarHandler implements PulsarHandler {
                 .append(config.getNamespace())
                 .append("/")
                 .append(getPlainTopic());
-        return  builder.toString();
+        return builder.toString();
     }
 
     protected abstract String getPlainTopic();

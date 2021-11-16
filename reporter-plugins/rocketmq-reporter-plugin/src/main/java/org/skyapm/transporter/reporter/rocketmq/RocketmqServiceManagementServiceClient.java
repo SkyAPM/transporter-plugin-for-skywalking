@@ -45,7 +45,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * A service management data(Instance registering properties and Instance pinging) reporter.
  */
 @OverrideImplementor(ServiceManagementClient.class)
-public class RocketmqServiceManagementServiceClient implements BootService, Runnable, RocketmqConnectionStatusListener  {
+public class RocketmqServiceManagementServiceClient implements BootService, Runnable, RocketmqConnectionStatusListener {
     private static final ILog LOGGER = LogManager.getLogger(RocketmqServiceManagementServiceClient.class);
 
     private static List<KeyStringValuePair> SERVICE_INSTANCE_PROPERTIES;
