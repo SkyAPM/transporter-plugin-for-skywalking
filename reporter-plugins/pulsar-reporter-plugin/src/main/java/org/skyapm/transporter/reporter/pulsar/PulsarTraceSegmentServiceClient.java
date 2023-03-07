@@ -18,6 +18,7 @@
 package org.skyapm.transporter.reporter.pulsar;
 
 import java.util.List;
+import java.util.Properties;
 import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClientException;
 import org.apache.skywalking.apm.agent.core.boot.BootService;
@@ -75,7 +76,7 @@ public class PulsarTraceSegmentServiceClient implements BootService, IConsumer<T
     }
 
     @Override
-    public void init() {
+    public void init(Properties properties) {
 
     }
 

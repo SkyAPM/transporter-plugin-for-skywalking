@@ -17,7 +17,7 @@
 
 package org.skyapm.transporter.fetcher.rocketmq.provider.hander;
 
-import org.apache.skywalking.apm.util.StringUtil;
+import org.apache.skywalking.oap.server.library.util.StringUtil;
 import org.apache.skywalking.oap.server.library.module.ModuleManager;
 import org.skyapm.transporter.fetcher.rocketmq.module.RocketmqFetcherConfig;
 

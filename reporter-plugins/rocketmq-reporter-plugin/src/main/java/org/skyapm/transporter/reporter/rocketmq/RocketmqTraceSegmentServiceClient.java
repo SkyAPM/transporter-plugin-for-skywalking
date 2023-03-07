@@ -17,6 +17,7 @@
 
 package org.skyapm.transporter.reporter.rocketmq;
 
+import java.util.Properties;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.skywalking.apm.agent.core.boot.BootService;
@@ -76,7 +77,7 @@ public class RocketmqTraceSegmentServiceClient implements BootService, IConsumer
     }
 
     @Override
-    public void init() {
+    public void init(Properties properties) {
 
     }
 

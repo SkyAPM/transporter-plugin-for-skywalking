@@ -65,12 +65,6 @@ public class PulsarServiceManagementServiceClient implements BootService, Runnab
         topic = producerManager.formatTopicNameThenRegister(PulsarReporterPluginConfig.Plugin.Pulsar.TOPIC_MANAGEMENT);
 
         SERVICE_INSTANCE_PROPERTIES = new ArrayList<>();
-        for (String key : Config.Agent.INSTANCE_PROPERTIES.keySet()) {
-            SERVICE_INSTANCE_PROPERTIES.add(KeyStringValuePair.newBuilder()
-                                                              .setKey(key)
-                                                              .setValue(Config.Agent.INSTANCE_PROPERTIES.get(key))
-                                                              .build());
-        }
     }
 
     @Override

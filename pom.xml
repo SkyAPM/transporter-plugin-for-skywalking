@@ -32,7 +32,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <compiler.version>1.8</compiler.version>
         <checkstyle.version>6.18</checkstyle.version>
-        <skywalking.version>8.7.0</skywalking.version>
+        <skywalking.version>9.2.0</skywalking.version>
+        <skywalking.apm.agent.version>8.13.0</skywalking.apm.agent.version>
         <lombok.version>1.18.20</lombok.version>
         <powermock.version>2.0.7</powermock.version>
         <junit.version>4.12</junit.version>
